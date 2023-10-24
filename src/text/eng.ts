@@ -10,7 +10,8 @@ const eng = {
     'error-select-an-item':'Please, select a cake',
     'error-select-future-date':'Please, select a valid date',
     'error-select-future-hour':'Please, select a valid hour',
-    'error-complete-required-fields':'Please complete all required fields'
+    'error-complete-required-fields':'Please complete all required fields',
+    'error-invalid-email':'Please enter a vaid email'
 
 }
 

@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import "./styles.scss";
 import Input from "../Input";
@@ -20,7 +20,7 @@ function Form() {
   const [countries, setCountries] = useState<any[]>([]);
 
   useEffect(()=>{
-    setToday(formatCurrentDate());
+    setToday(getFormattedCurrentDate());
     setCountriesList();
   },[]);
 
@@ -35,7 +35,7 @@ function Form() {
       });
   }
 
-  function formatCurrentDate(){
+  function getFormattedCurrentDate(){
     let date = new Date().toISOString().split('T')[0];
     return date;
   }
@@ -77,6 +77,17 @@ function Form() {
           progress: undefined,
           theme: "light",
         });
+    }else if(!data.email.match(/\S+@\S+\.\S+/)){
+      toast.error(`${eng["error-invalid-email"]}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }else if(data.cake === ''){
       toast.error(`${eng["error-select-an-item"]}`, {
         position: "top-center",
@@ -99,7 +110,7 @@ function Form() {
         progress: undefined,
         theme: "light",
       });
-    }else if(data.time < hour && data.time !==''){
+    }else if(data.time < hour && data.time !=='' && data.date === today){
       toast.error(`${eng["error-select-future-hour"]}`, {
         position: "top-center",
         autoClose: 5000,
@@ -240,7 +251,7 @@ function Form() {
           </div>
 
           <div className="col-md-6 mb-4">
-            <Input control={control} name="email" labelName="Email" type="text" isRequired={true}/>
+            <Input control={control} name="email" labelName="Email" type="email" isRequired={true}/>
             <p>{eng["form-order-email-info"]}</p>
           </div>
         </div>
@@ -255,7 +266,7 @@ function Form() {
         </div>
 
         <div className="col-md-12 mb-3">
-          <Input control={control} name="street-address-line-2" placeholder="Street Address Line 2" type="text" isRequired={true}/>
+          <Input control={control} name="street-address-line-2" placeholder="Street Address Line 2" type="text" isRequired={false}/>
         </div>
 
         <div className="col-md-6 mb-3">

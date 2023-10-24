@@ -1,46 +1,72 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+<img src="https://github.com/Calebe-Fernandes/sistema-de-comandas/blob/master/Thumbnail.svg" width="100%" height="auto" alt="Thumbnail">
 
-In the project directory, you can run:
+> O teste técnico prevê a criação de um formulário de pedido para uma loja de bolos, de acordo com o layout fornecido.
 
-### `npm start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## O Projeto
+O Projeto foi criado de forma resposniva para se adaptar à telas mobile e desktop.
+##### Você pode conferir o protótipo nesse link: 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<br>
 
-### `npm test`
+## 💻 Tecnologias e aplicações
+<h3>Frontend - React.Js - TypeScript - SAS - Bootstrap - React Form Hooks - React Toastify</h3>
+<h3><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+width="5%" height="auto">&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+width="5%" height="auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;<img src="https://sass-lang.com/assets/img/styleguide/seal-color-aef0354c.png"
+width="5%" height="auto"></h3>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para construção da aplicação, o ReactJs foi determinado como pré-requisito, possibilitando a alteração e manipulação do DOM sem ocasionar recarregamentos, sendo mais performático neste sentido. O Bootstrap foi utilizado para a responsividade dos elementos agrupadores (como elementos de div) e o pré processador SASS foi utilizado para estilização específica de elementos, sendo uma de suas principais vantagens a possibilidade de hierarquizar e agrupar os estilos, melhorando também a manuteção do código.
 
-### `npm run build`
+A arquitetura de pastas se baseia em componentes, onde cada componente tem sua própria pasta que contém seu arquivo index.tsx e seu arquivo styles.scss, de modo
+a separar os conteúdos. O arquivo index.ts exporta os componentes de forma modular, proporcionando uma importação mais organizada e legível.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Os textos da aplicação foram separados em um arquivo eng.ts, afim de concentrar as variáveis de desto e facilitar a manutenção do código. Em projetos maiores,
+é uma boa prática manter os textos como variáveis para caso mudem,não seja necessário navegar por toda a aplicação para alterá-lo em diferentes pontos.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+As variáveis de cores se encontram no arquivo colors.scss, e foram separadas também para manter o código de fácil manutenção e alteração
 
-### `npm run eject`
+O React Form Hooks foi utilizado para lidar com os campos do formulário, melhorando a eficiência e manutenção de código, onde não é necessário gerenciar o estado
+de todos os campos do formulário para acessar seus valores via useState ou similares.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+O React Toastify foi utiizado para notificar o usuário com mensagens estilo "notificações" de sucessos e erros durante sua interação na aplicação
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+<br>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🚀 Features
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Responsividade
+*Layout responsivo para mobile e web
+
+### Dupla verificação nos campos obrigatórios
+* O usuário não conseguirá enviar o formulário mesmo alterando propriedades de um elemento (como "required" de um input), pois além dos atributos semânticos do html, os mesmos são validados via
+JavaScript, o que garante uma maior integridade de dados na comunicação com a api.
+
+### Relação de Data e Hora 
+* Não é possível agendar uma entrega para um horário anterior ao atual, caso a data de entrega seja para o dia atual.
+(Por exemplo, ao realizar um pedido 12h do dia 26/10, não é possível enviar o formulário com o horário para as 11h do dia 26/10)
+
+###  Integridade nas regras de negócio
+* Consideraram-se os campos de enderço e data de entrega como obrigatórios, pois sem essas informações não seria possível realizar a entrega do produto (e termos de regra de negócio)
+
+### Integridade de Data e Hora
+* Foram mantidos a ordem "DD/MM/AAAA" e "HH/MM" para lidar com datas, pois apesar do layout estar em um padrão americano (MM/DD/AAAA), o acesso é feito pelo navegador localizado para o Brasil,
+e o navegador interpreta o input no formato local. Como foram usadas funções que lidam com datas no JavaScript (new Date();), manipular estes formatos poderia cauar uma inconsistência
+nos dados na hora da comunicação com uma api em um cenário real, portanto optou-se por manter a ordem original provinda do navegador.
+#### Documentação de referência: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
+
+
+### Integração com API de países
+* O Campo select "Country" é populado dinamicamente com dados originados de uma api
+
+
+
+<br>
