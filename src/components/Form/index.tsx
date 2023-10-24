@@ -1,5 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+
 import "./styles.scss";
 import Input from "../Input";
 import eng from "../../text/eng";
@@ -13,9 +15,9 @@ import cake4 from '../../assets/cake4.jpg'
 
 function Form() {
   const {control, handleSubmit,reset} = useForm();
-  const [today,setToday] =useState("");
+  const [today,setToday] =useState<string>("");
+  const[hour,setHour] = useState<string>("");
   const [countries, setCountries] = useState<any[]>([]);
-
 
   useEffect(()=>{
     setToday(formatCurrentDate());
@@ -34,18 +36,112 @@ function Form() {
   }
 
   function formatCurrentDate(){
-    var date = new Date().toISOString().split('T')[0];
-    var [year,month,day] = date.split('-')
-    var formattedDate = `${day}/${month}/${year}`
-    return formattedDate
+    let date = new Date().toISOString().split('T')[0];
+    return date;
   }
 
-  function onsubmit(data:any){
-    console.log(data);
-    reset();
+  function getTime(){
+    const dateAndHour = new Date();
+    let formatedHour = `${String(dateAndHour.getHours()).padStart(2, '0')}:${String(dateAndHour.getMinutes()).padStart(2, '0')}`;
+    setHour(formatedHour);
   }
 
-  
+  function validateFormFields(data:any){
+    if(data.cake === ''){
+      toast.error(`${eng["error-select-an-item"]}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }else if(data.name ===''){
+      toast.error(`${eng["error-enter-your-name"]}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }else if(data.date < today){
+      toast.error(`${eng["error-select-future-date"]}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }else if(data.time < hour){
+      toast.error(`${eng["error-select-future-hour"]}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }else{
+      registerOrder(data);
+    }
+  }
+
+  async function registerOrder(data:any){
+    await fetch('https://jsonplaceholder.typicode.com/posts',{
+      method:"POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(async (response) => {
+      if(response.status == 201){
+        const responseData = await response.json();
+        
+        console.log(response.status)
+        console.log(responseData);
+
+        toast.success(`${eng.succes}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        reset();
+      }else{
+        toast.error(`${eng.error}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    })
+  }
+
+  async function onsubmit(data:{}){
+    getTime();
+    validateFormFields(data);
+  }
+
   return (
     <form 
       onSubmit={handleSubmit(onsubmit)} 
@@ -68,8 +164,8 @@ function Form() {
         <div className="col-md-6 mb-4">
           <CakeOption 
             image={cake2} 
-            alt={"champagne-cookie-cake"} 
-            value={"champagne-cookie-cake"} 
+            alt={"strawberry-cake"} 
+            value={"strawberry-cake"} 
             name={"cake"} 
             type={"radio"}
             control={control}
@@ -79,8 +175,8 @@ function Form() {
         <div className="col-md-6 mb-4">
           <CakeOption 
             image={cake3} 
-            alt={"champagne-cookie-cake"} 
-            value={"champagne-cookie-cake"} 
+            alt={"chocolate-cake"} 
+            value={"chocolate-cake"} 
             name={"cake"} 
             type={"radio"}
             control={control}
@@ -90,14 +186,14 @@ function Form() {
         <div className="col-md-6 mb-4">
           <CakeOption 
             image={cake4} 
-            alt={"champagne-cookie-cake"} 
-            value={"champagne-cookie-cake"} 
+            alt={"rainbow-cake"} 
+            value={"rainbow-cake"} 
             name={"cake"} 
             type={"radio"}
             control={control}
           />            
         </div> 
-        
+
       </div> 
 
       <div className="order-info mt-3">
@@ -109,11 +205,11 @@ function Form() {
           </div>
 
           <div className="col-md-6 d-flex align-items-end mb-4">
-            <Input control={control} name="last" placeholder="Last" isRequired={false}/>
+            <Input control={control} name="last" placeholder="Last" isRequired={true}/>
           </div>
 
           <div className="col-md-6 mb-4">
-            <Input control={control} name="date" labelName="Delivery date"  type="date" min={today} isRequired={false}/>
+            <Input control={control} name="date" labelName="Delivery date" type="date" min={today} isRequired={true}/>
           </div>
 
           <div className="col-md-6 mb-4">
@@ -133,26 +229,26 @@ function Form() {
 
       <div className="addres row">
 
-        <p>{eng["form-addres"]}</p>
+        <p>{eng["form-addres"]}<span>*</span></p>
 
         <div className="col-md-12 mb-3">
-          <Input control={control} name="street-addres" placeholder="Street Address" type="text" isRequired={false}/>
+          <Input control={control} name="street-addres" placeholder="Street Address" type="text" isRequired={true}/>
         </div>
 
         <div className="col-md-12 mb-3">
-          <Input control={control} name="street-address-line-2" placeholder="Street Address Line 2" type="text" isRequired={false}/>
+          <Input control={control} name="street-address-line-2" placeholder="Street Address Line 2" type="text" isRequired={true}/>
         </div>
 
         <div className="col-md-6 mb-3">
-          <Input control={control} name="city" placeholder="City" type="text" isRequired={false}/>
+          <Input control={control} name="city" placeholder="City" type="text" isRequired={true}/>
         </div>
 
         <div className="col-md-6 mb-3">
-          <Input control={control} name="region" placeholder="Region" type="text" isRequired={false}/>
+          <Input control={control} name="region" placeholder="Region" type="text" isRequired={true}/>
         </div>
 
         <div className="col-md-6 mb-3">
-          <Input control={control} name="zip" placeholder="Postal / Zip Code" type="number" isRequired={false}/>
+          <Input control={control} name="zip" placeholder="Postal / Zip Code" type="number" isRequired={true}/>
         </div>
 
         <div className="col-md-6 mb-3">
@@ -161,7 +257,7 @@ function Form() {
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <select {...field}>
+              <select {...field} required>
                 <option value="Country">Country</option>
                 {countries.map((country) => (
                   <option key={country.cca2} value={country.name.common}>

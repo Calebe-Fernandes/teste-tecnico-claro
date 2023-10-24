@@ -5,8 +5,13 @@ const eng = {
     'form-order-information':'Order Information',
     'form-order-email-info':'To receive the complete receipt',
     'form-addres':'Address',
-    'succes':'Order sent successfully',
-    'error':'An error ocurred while processing your order'
+    'succes':'Order sent successfully 🎂',
+    'error':'An unexpected error occurred',
+    'error-select-an-item':'Please, select a cake',
+    'error-select-future-date':'Please, select a valid date',
+    'error-select-future-hour':'Please, select a valid hour',
+    'error-enter-your-name':'Please, enter your first and last name'
+
 }
 
 export default eng;
