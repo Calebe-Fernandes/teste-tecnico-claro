@@ -1,0 +1,17 @@
+form{
+  p{
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .cake-options{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .option-wrapper{
+    box-sizing: border-box;
+  }
+}

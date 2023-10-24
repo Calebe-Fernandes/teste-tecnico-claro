@@ -1,0 +1,17 @@
+img{
+  width: 90%;
+  height: 250px;
+
+  object-fit: cover;
+}
+
+input[type="radio"]{
+  width: 28px;
+  height: 28px;
+  align-self: center;
+
+  margin-right: 18px;
+
+  border-color: var(--radio-button);
+}
+
