@@ -1,22 +1,100 @@
-form{
+form {
   p{
     color: var(--text);
     font-weight: 500;
   }
 
-  span{
+  span {
     color: red;
   }
 
-  button{
+  button {
     background-color: var(--button);
   }
 
-  .order-info{
-    p{
+
+  .order-info,.addres {
+    p {
       font-size: 26px;
       font-weight: 400;
       text-decoration: underline;
+    }
+
+    input{
+      width: 100%;
+      height: 54px;
+      box-sizing: border-box;
+      padding: 12px 14px;
+    
+      border: 1px solid var(--input-border);
+      border-radius: 4px;
+      color: var(--placeholder);
+
+      &::-webkit-input-placeholder{
+        color: var(--placeholder);
+      }
+      cursor: pointer;
+
+    }
+
+    input[type="date"],input[type="time"]{
+      &::-webkit-calendar-picker-indicator{
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        filter: invert(0.5) sepia(100%) saturate(100%) hue-rotate(180deg);
+      }
+    }
+
+    label{
+      font-size: 16px;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .col-md-6 p{
+      margin-top: 6px;
+      margin-bottom: 0px;
+      font-size: 14px;
+      text-decoration: none;
+      color: var(--input-information);
+    }
+  }
+  
+  .addres{
+    p{
+      font-size: 16px;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 6px;
+      text-decoration: none;
+    }
+
+    option{
+      color: var(--placeholder);
+    }
+
+    select{
+      width: 100%;
+      height: 54px;
+      box-sizing: border-box;
+      padding: 12px 14px;
+    
+      border: 1px solid var(--input-border);
+      border-radius: 4px;
+      color: var(--placeholder);
+      cursor: pointer;
+
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23c2c2c2' d='M1 2l3 3 3-3H1z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: calc(100% - 12px) center;
+      background-size: auto 30%;
+      padding-right: 1em;
+
     }
   }
 }
