@@ -47,19 +47,38 @@ function Form() {
   }
 
   function validateFormFields(data:any){
-    if(data.cake === ''){
+    let emptyField;
+
+    for(let key in data){
+      if (data[key] === null || data[key] === undefined || data[key] === '') {
+        emptyField = key 
+      }
+    }
+    
+    if(
+        emptyField === 'name' ||
+        emptyField === 'last' ||
+        emptyField === 'email'|| 
+        emptyField === 'phone'||
+        emptyField === 'last' ||
+        emptyField === 'region'||
+        emptyField === 'street-addres'||
+        emptyField === 'country'||
+        emptyField === 'city'||
+        emptyField === 'zip'
+      ){
+        toast.error(`${eng["error-complete-required-fields"]}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+    }else if(data.cake === ''){
       toast.error(`${eng["error-select-an-item"]}`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }else if(data.name ===''){
-      toast.error(`${eng["error-enter-your-name"]}`, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -80,7 +99,7 @@ function Form() {
         progress: undefined,
         theme: "light",
       });
-    }else if(data.time < hour){
+    }else if(data.time < hour && data.time !==''){
       toast.error(`${eng["error-select-future-hour"]}`, {
         position: "top-center",
         autoClose: 5000,
