@@ -1,14 +1,10 @@
 
 
-<img src="https://github.com/Calebe-Fernandes/sistema-de-comandas/blob/master/Thumbnail.svg" width="100%" height="auto" alt="Thumbnail">
+<img src="https://4maos.com.br/wp-content/uploads/2022/06/dplnews_claro_mc100222.jpeg" width="400%" height="400" alt="Thumbnail">
 
-> O teste técnico prevê a criação de um formulário de pedido para uma loja de bolos, de acordo com o layout fornecido.
+## Documentação do projeto
 
-<br>
-
-## O Projeto
-O Projeto foi criado de forma resposniva para se adaptar à telas mobile e desktop.
-##### Você pode conferir o protótipo nesse link: 
+> O teste técnico prevê a criação de um formulário de pedido para uma loja de bolos, de acordo com o layout fornecido. Você pode conferir os detalhes documentados neste arquivo antes de avaliar o código
 
 <br>
 
@@ -16,7 +12,6 @@ O Projeto foi criado de forma resposniva para se adaptar à telas mobile e deskt
 <h3>Frontend - React.Js - TypeScript - SAS - Bootstrap - React Form Hooks - React Toastify</h3>
 <h3><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
 width="5%" height="auto">&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-width="5%" height="auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;<img src="https://sass-lang.com/assets/img/styleguide/seal-color-aef0354c.png"
 width="5%" height="auto"></h3>
 
 Para construção da aplicação, o ReactJs foi determinado como pré-requisito, possibilitando a alteração e manipulação do DOM sem ocasionar recarregamentos, sendo mais performático neste sentido. O Bootstrap foi utilizado para a responsividade dos elementos agrupadores (como elementos de div) e o pré processador SASS foi utilizado para estilização específica de elementos, sendo uma de suas principais vantagens a possibilidade de hierarquizar e agrupar os estilos, melhorando também a manuteção do código.
@@ -44,7 +39,7 @@ O React Toastify foi utiizado para notificar o usuário com mensagens estilo "no
 ## 🚀 Features
 
 ### Responsividade
-*Layout responsivo para mobile e web
+* Layout responsivo para mobile e web
 
 ### Dupla verificação nos campos obrigatórios
 * O usuário não conseguirá enviar o formulário mesmo alterando propriedades de um elemento (como "required" de um input), pois além dos atributos semânticos do html, os mesmos são validados via
@@ -61,7 +56,8 @@ JavaScript, o que garante uma maior integridade de dados na comunicação com a 
 * Foram mantidos a ordem "DD/MM/AAAA" e "HH/MM" para lidar com datas, pois apesar do layout estar em um padrão americano (MM/DD/AAAA), o acesso é feito pelo navegador localizado para o Brasil,
 e o navegador interpreta o input no formato local. Como foram usadas funções que lidam com datas no JavaScript (new Date();), manipular estes formatos poderia cauar uma inconsistência
 nos dados na hora da comunicação com uma api em um cenário real, portanto optou-se por manter a ordem original provinda do navegador.
-#### Documentação de referência: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
+
+* Documentação de referência: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
 
 
 ### Integração com API de países
