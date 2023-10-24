@@ -8,7 +8,7 @@ function Input({ labelName, ...props }: InputProps) {
   return (
     <>  
         <label htmlFor={props.id}>{labelName}</label>
-        <input {...props} /> 
+        <input className="w-100" {...props} /> 
     </>
   );
 }

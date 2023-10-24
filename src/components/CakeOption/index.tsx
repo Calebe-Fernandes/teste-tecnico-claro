@@ -9,7 +9,6 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type: string
 }
 
-
 function CakeOption({ image, alt, name, type, value, ...props }: InputProps){
 return (
   <div className="d-flex">
