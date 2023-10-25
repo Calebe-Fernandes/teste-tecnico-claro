@@ -1,4 +1,4 @@
-import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
 
@@ -94,7 +94,7 @@ function Form() {
       labelName:'Phone',
       placeHolder:'### ### ###',
       type:'number',
-      min:'',
+      min:0,
       isRequired:true
     },
     {
@@ -136,6 +136,7 @@ function Form() {
       name:'zipCode',
       labelName:'Postal / Zip Code',
       type:'number',
+      min:0,
       isRequired:true
     },
   ]
@@ -186,7 +187,8 @@ function Form() {
         emptyField === 'streetAddres'||
         emptyField === 'country'||
         emptyField === 'city'||
-        emptyField === 'zipCode'
+        emptyField === 'zipCode'||
+        data.country ==='Country'
       ){
         toast.error(`${eng["error-complete-required-fields"]}`, {
           position: "top-center",
@@ -384,13 +386,25 @@ function Form() {
               }
               {index > 1 &&
                 <div className="col-md-6 mb-3" key={input.name}>
-                  <Input
-                    control={control}
-                    name={input.name}
-                    placeholder={input.labelName}
-                    type={input.type}
-                    isRequired={input.isRequired}
-                  />
+                  { input.type === 'number' ?
+                      <Input
+                        control={control}
+                        name={input.name}
+                        placeholder={input.labelName}
+                        type={input.type}
+                        min={input.min}
+                        isRequired={input.isRequired}
+                      />
+                    :
+                      <Input
+                        control={control}
+                        name={input.name}
+                        placeholder={input.labelName}
+                        type={input.type}
+                        isRequired={input.isRequired}
+                      />
+                  }
+
                 </div>
               }
             </>

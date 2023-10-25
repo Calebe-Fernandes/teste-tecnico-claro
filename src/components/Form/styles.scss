@@ -37,6 +37,15 @@ form {
 
     }
 
+    input[type="number"]{
+      -moz-appearance: textfield;
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button{
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
     input[type="date"],input[type="time"]{
       &::-webkit-calendar-picker-indicator{
         width: 24px;
