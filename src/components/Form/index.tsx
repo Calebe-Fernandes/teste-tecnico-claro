@@ -304,14 +304,14 @@ function Form() {
       <div className="row">
         {cakeOptions.map((cake, index) => (
             <div className="col-md-6 mb-4" key={Input.name}>
-                <CakeOption
-                  image={cake.image}
-                  alt={cake.name}
-                  value={cake.name}
-                  name="cake"
-                  type="radio"
-                  control={control}
-                />
+              <CakeOption
+                image={cake.image}
+                alt={cake.name}
+                value={cake.name}
+                name="cake"
+                type="radio"
+                control={control}
+              />
             </div>
           ))
         }
