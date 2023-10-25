@@ -1,4 +1,4 @@
-import { Controller, useForm } from "react-hook-form";
+import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
 
@@ -13,11 +13,132 @@ import cake2 from '../../assets/cake2.jpg'
 import cake3 from '../../assets/cake3.jpg'
 import cake4 from '../../assets/cake4.jpg'
 
-function Form() {
+
+interface cakeOrder{
+  cake:string,
+  city:string,
+  country:string,
+  date:string,
+  email:string,
+  name:string,
+  last:string,
+  phone:string,
+  region:string,
+  streetAddress:string,
+  streetAddressLine2:string,
+  time:string,
+  zipCode:string,
+  [key: string]: string;
+}
+
+function Form() {  
   const {control, handleSubmit,reset} = useForm();
   const [today,setToday] =useState<string>("");
   const[hour,setHour] = useState<string>("");
   const [countries, setCountries] = useState<any[]>([]);
+
+  const cakeOptions = [
+    {
+      image:cake1,
+      name:'champagne-cookie-cake'
+    },
+    {
+      image:cake2,
+      name:'strawberry-cake'
+    },
+    {
+      image:cake3,
+      name:'chocolate-cake'
+    },
+    {
+      image:cake4,
+      name:'rainbow-cake'
+    },
+  ]
+  
+  const orderInfoInputs = [
+    {
+      name:'name',
+      labelName:'Name',
+      placeHolder:'First',
+      type:'text',
+      min:'',
+      isRequired:true
+    },
+    {
+      name:'last',
+      labelName:'',
+      placeHolder:'Last',
+      type:'text',
+      min:'',
+      isRequired:true
+    },
+    {
+      name:'date',
+      labelName:'Delivery date',
+      placeHolder:'',
+      type:'date',
+      min:today,
+      isRequired:true
+    },
+    {
+      name:'time',
+      labelName:'Prefered delivery time',
+      placeHolder:'',
+      type:'time',
+      min:'',
+      isRequired:false
+    },
+    {
+      name:'phone',
+      labelName:'Phone',
+      placeHolder:'### ### ###',
+      type:'number',
+      min:'',
+      isRequired:true
+    },
+    {
+      name:'email',
+      labelName:'Email',
+      placeHolder:'',
+      type:'email',
+      min:'',
+      isRequired:true
+    }
+  ]
+  
+  const addresInputs = [
+    {
+      name:'streetAddres',
+      labelName:'Street Address',
+      type:'text',
+      isRequired:true
+    },
+    {
+      name:'streetAddresLine2',
+      labelName:'Street Address Line 2',
+      type:'text',
+      isRequired:false
+    },
+    {
+      name:'city',
+      labelName:'City',
+      type:'text',
+      isRequired:true
+    },
+    {
+      name:'region',
+      labelName:'Region',
+      type:'text',
+      isRequired:true
+    },
+    {
+      name:'zipCode',
+      labelName:'Postal / Zip Code',
+      type:'number',
+      isRequired:true
+    },
+  ]
 
   useEffect(()=>{
     setToday(getFormattedCurrentDate());
@@ -46,7 +167,7 @@ function Form() {
     setHour(formatedHour);
   }
 
-  function validateFormFields(data:any){
+  function validateFormFields(data:cakeOrder){
     let emptyField;
 
     for(let key in data){
@@ -62,10 +183,10 @@ function Form() {
         emptyField === 'phone'||
         emptyField === 'last' ||
         emptyField === 'region'||
-        emptyField === 'street-addres'||
+        emptyField === 'streetAddres'||
         emptyField === 'country'||
         emptyField === 'city'||
-        emptyField === 'zip'
+        emptyField === 'zipCode'
       ){
         toast.error(`${eng["error-complete-required-fields"]}`, {
           position: "top-center",
@@ -126,7 +247,7 @@ function Form() {
     }
   }
 
-  async function registerOrder(data:any){
+  async function registerOrder(data:cakeOrder){
     await fetch('https://jsonplaceholder.typicode.com/posts',{
       method:"POST",
       headers: {
@@ -167,9 +288,9 @@ function Form() {
     })
   }
 
-  async function onsubmit(data:{}){
+  async function onsubmit(data:Object){
     getTime();
-    validateFormFields(data);
+    validateFormFields(data as cakeOrder);
   }
 
   return (
@@ -179,107 +300,102 @@ function Form() {
     >
       <p className="mb-4">{eng["form-choose-your-cake"]}<span>*</span></p>
       <div className="row">
-
-        <div className="col-md-6 mb-4">
-          <CakeOption 
-            image={cake1} 
-            alt={"champagne-cookie-cake"} 
-            value={"champagne-cookie-cake"} 
-            name={"cake"} 
-            type={"radio"}
-            control={control}
-          />
-        </div>
-
-        <div className="col-md-6 mb-4">
-          <CakeOption 
-            image={cake2} 
-            alt={"strawberry-cake"} 
-            value={"strawberry-cake"} 
-            name={"cake"} 
-            type={"radio"}
-            control={control}
-          />
-        </div>
-
-        <div className="col-md-6 mb-4">
-          <CakeOption 
-            image={cake3} 
-            alt={"chocolate-cake"} 
-            value={"chocolate-cake"} 
-            name={"cake"} 
-            type={"radio"}
-            control={control}
-          />
-        </div>
-
-        <div className="col-md-6 mb-4">
-          <CakeOption 
-            image={cake4} 
-            alt={"rainbow-cake"} 
-            value={"rainbow-cake"} 
-            name={"cake"} 
-            type={"radio"}
-            control={control}
-          />            
-        </div> 
-
+        {cakeOptions.map((cake, index) => (
+            <div className="col-md-6 mb-4" key={Input.name}>
+                <CakeOption
+                  image={cake.image}
+                  alt={cake.name}
+                  value={cake.name}
+                  name="cake"
+                  type="radio"
+                  control={control}
+                />
+            </div>
+          ))
+        }
       </div> 
 
       <div className="order-info mt-3">
         <p>{eng["form-order-information"]}</p>
 
         <div className="row">
-          <div className="col-md-6 mb-4">
-            <Input control={control} name="name" labelName="Name" placeholder="First" isRequired={true}/>
-          </div>
-
-          <div className="col-md-6 d-flex align-items-end mb-4">
-            <Input control={control} name="last" placeholder="Last" isRequired={true}/>
-          </div>
-
-          <div className="col-md-6 mb-4">
-            <Input control={control} name="date" labelName="Delivery date" type="date" min={today} isRequired={true}/>
-          </div>
-
-          <div className="col-md-6 mb-4">
-            <Input control={control} name="time" labelName="Prefered delivery time" type="time" isRequired={false}/>
-          </div>
-
-          <div className="col-md-6 mb-4">
-            <Input control={control} name="phone" labelName="Phone" placeholder="### ### ###" type="number" isRequired={true}/>
-          </div>
-
-          <div className="col-md-6 mb-4">
-            <Input control={control} name="email" labelName="Email" type="email" isRequired={true}/>
-            <p>{eng["form-order-email-info"]}</p>
-          </div>
+          {orderInfoInputs.map((input, index) => (
+              <div className={`col-md-6 mb-4 ${input.name === 'last' ? 'd-flex align-items-end' : ''}`} key={input.name}>
+                {
+                  input.min ==='' && input.labelName !== '' ?
+                    <>
+                      <Input
+                        control={control}
+                        name={input.name}
+                        labelName={input.labelName}
+                        placeholder={input.placeHolder}
+                        type={input.type}
+                        isRequired={input.isRequired}
+                      />
+                      {input.name === 'email' ?  <p>{eng["form-order-email-info"]}</p> : false}
+                    </>
+                  : false
+                }
+                {
+                  input.labelName === ''?
+                    <Input
+                      control={control}
+                      name={input.name}
+                      placeholder={input.placeHolder}
+                      type={input.type}
+                      isRequired={input.isRequired}
+                    />
+                    : false
+                }
+                {
+                  input.min !== '' ?
+                  <Input
+                    control={control}
+                    name={input.name}
+                    labelName={input.labelName}
+                    placeholder={input.placeHolder}
+                    type={input.type}
+                    min={input.min}
+                    isRequired={input.isRequired}
+                  />
+                  : false
+                }
+              </div>
+            ))
+          }
         </div>
       </div>
 
-      <div className="addres row">
-
+      <div className="address row">
         <p>{eng["form-addres"]}<span>*</span></p>
-
-        <div className="col-md-12 mb-3">
-          <Input control={control} name="street-addres" placeholder="Street Address" type="text" isRequired={true}/>
-        </div>
-
-        <div className="col-md-12 mb-3">
-          <Input control={control} name="street-address-line-2" placeholder="Street Address Line 2" type="text" isRequired={false}/>
-        </div>
-
-        <div className="col-md-6 mb-3">
-          <Input control={control} name="city" placeholder="City" type="text" isRequired={true}/>
-        </div>
-
-        <div className="col-md-6 mb-3">
-          <Input control={control} name="region" placeholder="Region" type="text" isRequired={true}/>
-        </div>
-
-        <div className="col-md-6 mb-3">
-          <Input control={control} name="zip" placeholder="Postal / Zip Code" type="number" isRequired={true}/>
-        </div>
+        
+        {addresInputs.map((input, index) => (
+            <>
+              {index <=1 && 
+                <div className="col-md-12 mb-3" key={input.name}>
+                  <Input
+                    control={control}
+                    name={input.name}
+                    placeholder={input.labelName}
+                    type={input.type}
+                    isRequired={input.isRequired}
+                  />
+                </div>
+              }
+              {index > 1 &&
+                <div className="col-md-6 mb-3" key={input.name}>
+                  <Input
+                    control={control}
+                    name={input.name}
+                    placeholder={input.labelName}
+                    type={input.type}
+                    isRequired={input.isRequired}
+                  />
+                </div>
+              }
+            </>
+          ))
+        }
 
         <div className="col-md-6 mb-3">
           <Controller
