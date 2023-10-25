@@ -55,7 +55,7 @@ localhost:3000
 * A arquitetura de pastas se baseia em componentes, onde cada componente tem sua própria pasta que contém seu arquivo index.tsx e seu arquivo styles.scss, de modo
 a separar os conteúdos. O arquivo index.ts exporta os componentes de forma modular, proporcionando uma importação mais organizada e legível.
 
-* Os textos da aplicação foram separados em um arquivo eng.ts, afim de concentrar as variáveis de desto e facilitar a manutenção do código. Em projetos maiores,
+* Os textos da aplicação foram separados em um arquivo eng.ts, afim de concentrar as variáveis de texto e facilitar a manutenção do código. Em projetos maiores,
 é uma boa prática manter os textos como variáveis para caso mudem,não seja necessário navegar por toda a aplicação para alterá-lo em diferentes pontos.
 
 * As variáveis de cores se encontram no arquivo colors.scss, e foram separadas também para manter o código de fácil manutenção e alteração
