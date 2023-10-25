@@ -9,7 +9,7 @@
 <br>
 
 ## 💻 Tecnologias e aplicações
-<h3>Frontend - React.Js - TypeScript - SAS - Bootstrap - React Form Hooks - React Toastify</h3>
+<h3>Frontend - React.Js - TypeScript - SASS - Bootstrap - React Form Hooks - React Toastify</h3>
 <h3><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
 width="5%" height="auto">&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
 width="5%" height="auto"></h3>
