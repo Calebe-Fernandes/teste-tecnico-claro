@@ -1,5 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
+import emailjs from 'emailjs-com';
 import { toast } from 'react-toastify';
 
 import "./styles.scss";
@@ -36,23 +37,24 @@ function Form() {
   const [today,setToday] =useState<string>("");
   const[hour,setHour] = useState<string>("");
   const [countries, setCountries] = useState<any[]>([]);
+  const [resetInput,setResetInput] = useState<boolean>(true);
 
   const cakeOptions = [
     {
       image:cake1,
-      name:'champagne-cookie-cake'
+      name:'champagne-cookie-cake',
     },
     {
       image:cake2,
-      name:'strawberry-cake'
+      name:'strawberry-cake',
     },
     {
       image:cake3,
-      name:'chocolate-cake'
+      name:'chocolate-cake',
     },
     {
       image:cake4,
-      name:'rainbow-cake'
+      name:'rainbow-cake',
     },
   ]
   
@@ -94,7 +96,7 @@ function Form() {
       labelName:'Phone',
       placeHolder:'### ### ###',
       type:'number',
-      min:0,
+      min:'0',
       isRequired:true
     },
     {
@@ -136,7 +138,7 @@ function Form() {
       name:'zipCode',
       labelName:'Postal / Zip Code',
       type:'number',
-      min:0,
+      min:'0',
       isRequired:true
     },
   ]
@@ -258,6 +260,7 @@ function Form() {
       body: JSON.stringify(data)
     })
     .then(async (response) => {
+      setResetInput(false);
       if(response.status == 201){
         const responseData = await response.json();
         
@@ -274,7 +277,8 @@ function Form() {
           progress: undefined,
           theme: "light",
         });
-        reset();
+        reset(); 
+        setResetInput(true)
       }else{
         toast.error(`${eng.error}`, {
           position: "top-center",
@@ -290,20 +294,20 @@ function Form() {
     })
   }
 
-  async function onsubmit(data:Object){
+  function submitFormHandler(data:Object){
     getTime();
     validateFormFields(data as cakeOrder);
   }
 
   return (
     <form 
-      onSubmit={handleSubmit(onsubmit)} 
+      onSubmit={handleSubmit(submitFormHandler)} 
       className="mt-4"
     >
       <p className="mb-4">{eng["form-choose-your-cake"]}<span>*</span></p>
       <div className="row">
-        {cakeOptions.map((cake, index) => (
-            <div className="col-md-6 mb-4" key={Input.name}>
+        {resetInput && cakeOptions.map((cake,index) => (
+            <div className="col-md-6 mb-4" key={`${cake.name}-${index}`}>
               <CakeOption
                 image={cake.image}
                 alt={cake.name}
@@ -321,10 +325,10 @@ function Form() {
         <p>{eng["form-order-information"]}</p>
 
         <div className="row">
-          {orderInfoInputs.map((input, index) => (
-              <div className={`col-md-6 mb-4 ${input.name === 'last' ? 'd-flex align-items-end' : ''}`} key={input.name}>
+          {orderInfoInputs.map((input,index) => (
+              <div className={`col-md-6 mb-4 ${input.name === 'last' ? 'd-flex align-items-end' : ''}`} key={`${input.name}-${index}`}>
                 {
-                  input.min ==='' && input.labelName !== '' ?
+                  !input.min  && input.labelName &&
                     <>
                       <Input
                         control={control}
@@ -336,10 +340,9 @@ function Form() {
                       />
                       {input.name === 'email' ?  <p>{eng["form-order-email-info"]}</p> : false}
                     </>
-                  : false
                 }
                 {
-                  input.labelName === ''?
+                  !input.labelName &&
                     <Input
                       control={control}
                       name={input.name}
@@ -347,10 +350,9 @@ function Form() {
                       type={input.type}
                       isRequired={input.isRequired}
                     />
-                    : false
                 }
                 {
-                  input.min !== '' ?
+                  input.min &&
                   <Input
                     control={control}
                     name={input.name}
@@ -360,7 +362,6 @@ function Form() {
                     min={input.min}
                     isRequired={input.isRequired}
                   />
-                  : false
                 }
               </div>
             ))
@@ -374,7 +375,7 @@ function Form() {
         {addresInputs.map((input, index) => (
             <>
               {index <=1 && 
-                <div className="col-md-12 mb-3" key={input.name}>
+                <div className="col-md-12 mb-3" key={`${input.name}-${index}`}>
                   <Input
                     control={control}
                     name={input.name}
@@ -385,7 +386,7 @@ function Form() {
                 </div>
               }
               {index > 1 &&
-                <div className="col-md-6 mb-3" key={input.name}>
+                <div className="col-md-6 mb-3" key={`${input.name}-${index}`}>
                   { input.type === 'number' ?
                       <Input
                         control={control}
@@ -404,7 +405,6 @@ function Form() {
                         isRequired={input.isRequired}
                       />
                   }
-
                 </div>
               }
             </>
@@ -419,8 +419,8 @@ function Form() {
             render={({ field }) => (
               <select {...field} required>
                 <option value="Country">Country</option>
-                {countries.map((country) => (
-                  <option key={country.cca2} value={country.name.common}>
+                {countries.map((country,index) => (
+                  <option key={`${country.cc2}-${index}`} value={country.name.common}>
                     {country.name.common}
                   </option>
                 ))}
