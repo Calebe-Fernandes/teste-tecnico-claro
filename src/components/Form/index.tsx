@@ -1,6 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import emailjs from 'emailjs-com';
 import { toast } from 'react-toastify';
 
 import "./styles.scss";
