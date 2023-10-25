@@ -1,6 +1,6 @@
 
 
-<img src="https://4maos.com.br/wp-content/uploads/2022/06/dplnews_claro_mc100222.jpeg" width="400%" height="400" alt="Thumbnail">
+<img src="https://4maos.com.br/wp-content/uploads/2022/06/dplnews_claro_mc100222.jpeg"  alt="Thumbnail">
 
 ## Documentação do projeto
 
@@ -64,6 +64,19 @@ nos dados na hora da comunicação com uma api em um cenário real, portanto opt
 ### Integração com API de países
 * O Campo select "Country" é populado dinamicamente com dados originados de uma api
 
-
-
 <br>
+
+## Preview do projeto 🖥️
+
+* Notificações de sucesso e erro
+
+  <img src="https://github.com/Calebe-Fernandes/assets/blob/main/Captura%20de%20tela%202023-10-25%20120457.png?raw=true" alt="Thumbnail">
+  <img src="https://github.com/Calebe-Fernandes/assets/blob/main/Captura%20de%20tela%202023-10-25%20120531.png?raw=true" alt="Thumbnail">
+
+* Responsividade para dispositivos móveis
+
+  <img src="https://github.com/Calebe-Fernandes/assets/blob/main/Captura%20de%20tela%202023-10-25%20120659.png?raw=true" alt="Thumbnail">
+  <img src="https://github.com/Calebe-Fernandes/assets/blob/main/Captura%20de%20tela%202023-10-25%20120727.png?raw=true" alt="Thumbnail">
+  
+  
+
