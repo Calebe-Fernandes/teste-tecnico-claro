@@ -50,7 +50,7 @@ JavaScript, o que garante uma maior integridade de dados na comunicação com a 
 (Por exemplo, ao realizar um pedido 12h do dia 26/10, não é possível enviar o formulário com o horário para as 11h do dia 26/10)
 
 ###  Integridade nas regras de negócio
-* Consideraram-se os campos de enderço e data de entrega como obrigatórios, pois sem essas informações não seria possível realizar a entrega do produto (e termos de regra de negócio)
+* Consideraram-se os campos de enderço e data de entrega como obrigatórios, pois sem essas informações não seria possível realizar a entrega do produto (em termos de regra de negócio).
 
 ### Integridade de Data e Hora
 * Foram mantidos a ordem "DD/MM/AAAA" e "HH/MM" para lidar com datas, pois apesar do layout estar em um padrão americano (MM/DD/AAAA), o acesso é feito pelo navegador localizado para o Brasil,
