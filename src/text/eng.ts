@@ -11,7 +11,19 @@ const eng = {
     'error-select-future-date':'Please, select a valid date',
     'error-select-future-hour':'Please, select a valid hour',
     'error-complete-required-fields':'Please complete all required fields',
-    'error-invalid-email':'Please enter a vaid email'
+    'error-invalid-email':'Please enter a vaid email',
+    'modal-title':'Order review',
+    'modal-close':'Close',
+    'modal-help-1':'Need Help?',
+    'modal-help-2':'Contact us',
+    'modal-name':'Name: ',
+    'modal-cake':'Cake ordered: ',
+    'modal-date':'Delivery date:',
+    'modal-time':'Delivery hour:',
+    'modal-address':'Delivery address:'
+
+
+
 
 }
 

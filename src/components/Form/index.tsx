@@ -12,6 +12,7 @@ import cake1 from '../../assets/cake1.jpg'
 import cake2 from '../../assets/cake2.jpg'
 import cake3 from '../../assets/cake3.jpg'
 import cake4 from '../../assets/cake4.jpg'
+import ModalComponent from "../modal";
 
 
 interface cakeOrder{
@@ -34,9 +35,11 @@ interface cakeOrder{
 function Form() {  
   const {control, handleSubmit,reset} = useForm();
   const [today,setToday] =useState<string>("");
-  const[hour,setHour] = useState<string>("");
+  const [hour,setHour] = useState<string>("");
   const [countries, setCountries] = useState<any[]>([]);
   const [resetInput,setResetInput] = useState<boolean>(true);
+  const [orderData,setOrderData] = useState<cakeOrder>({} as cakeOrder);
+  const [isModalOpen,setIsModalOpen] = useState<boolean>(false);
 
   const cakeOptions = [
     {
@@ -276,8 +279,10 @@ function Form() {
           progress: undefined,
           theme: "light",
         });
-        reset(); 
-        setResetInput(true)
+        setOrderData(responseData);
+        setIsModalOpen(true);
+        //reset(); 
+        setResetInput(true);
       }else{
         toast.error(`${eng.error}`, {
           position: "top-center",
@@ -298,141 +303,149 @@ function Form() {
     validateFormFields(data as cakeOrder);
   }
 
+  function closeModal(){
+    setIsModalOpen(false)
+  }
+
   return (
-    <form 
-      onSubmit={handleSubmit(submitFormHandler)} 
-      className="mt-4"
-    >
-      <p className="mb-4">{eng["form-choose-your-cake"]}<span>*</span></p>
-      <div className="row">
-        {resetInput && cakeOptions.map((cake,index) => (
-            <div className="col-md-6 mb-4" key={`${cake.name}-${index}`}>
-              <CakeOption
-                image={cake.image}
-                alt={cake.name}
-                value={cake.name}
-                name="cake"
-                type="radio"
-                control={control}
-              />
-            </div>
-          ))
-        }
-      </div> 
-
-      <div className="order-info mt-3">
-        <p>{eng["form-order-information"]}</p>
-
+    <>
+      <form 
+        onSubmit={handleSubmit(submitFormHandler)} 
+        className="mt-4"
+      >
+        <p className="mb-4">{eng["form-choose-your-cake"]}<span>*</span></p>
         <div className="row">
-          {orderInfoInputs.map((input,index) => (
-              <div className={`col-md-6 mb-4 ${input.name === 'last' ? 'd-flex align-items-end' : ''}`} key={`${input.name}-${index}`}>
-                {
-                  !input.min  && input.labelName &&
-                    <>
+          {resetInput && cakeOptions.map((cake,index) => (
+              <div className="col-md-6 mb-4" key={`${cake.name}-${index}`}>
+                <CakeOption
+                  image={cake.image}
+                  alt={cake.name}
+                  value={cake.name}
+                  name="cake"
+                  type="radio"
+                  control={control}
+                />
+              </div>
+            ))
+          }
+        </div> 
+
+        <div className="order-info mt-3">
+          <p>{eng["form-order-information"]}</p>
+
+          <div className="row">
+            {orderInfoInputs.map((input,index) => (
+                <div className={`col-md-6 mb-4 ${input.name === 'last' ? 'd-flex align-items-end' : ''}`} key={`${input.name}-${index}`}>
+                  {
+                    !input.min  && input.labelName &&
+                      <>
+                        <Input
+                          control={control}
+                          name={input.name}
+                          labelName={input.labelName}
+                          placeholder={input.placeHolder}
+                          type={input.type}
+                          isRequired={input.isRequired}
+                        />
+                        {input.name === 'email' ?  <p>{eng["form-order-email-info"]}</p> : false}
+                      </>
+                  }
+                  {
+                    !input.labelName &&
                       <Input
                         control={control}
                         name={input.name}
-                        labelName={input.labelName}
                         placeholder={input.placeHolder}
                         type={input.type}
                         isRequired={input.isRequired}
                       />
-                      {input.name === 'email' ?  <p>{eng["form-order-email-info"]}</p> : false}
-                    </>
-                }
-                {
-                  !input.labelName &&
+                  }
+                  {
+                    input.min &&
                     <Input
                       control={control}
                       name={input.name}
+                      labelName={input.labelName}
                       placeholder={input.placeHolder}
+                      type={input.type}
+                      min={input.min}
+                      isRequired={input.isRequired}
+                    />
+                  }
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div className="address row">
+          <p>{eng["form-addres"]}<span>*</span></p>
+          
+          {addresInputs.map((input, index) => (
+              <>
+                {index <=1 && 
+                  <div className="col-md-12 mb-3" key={`${input.name}-${index}`}>
+                    <Input
+                      control={control}
+                      name={input.name}
+                      placeholder={input.labelName}
                       type={input.type}
                       isRequired={input.isRequired}
                     />
+                  </div>
                 }
-                {
-                  input.min &&
-                  <Input
-                    control={control}
-                    name={input.name}
-                    labelName={input.labelName}
-                    placeholder={input.placeHolder}
-                    type={input.type}
-                    min={input.min}
-                    isRequired={input.isRequired}
-                  />
+                {index > 1 &&
+                  <div className="col-md-6 mb-3" key={`${input.name}-${index}`}>
+                    { input.type === 'number' ?
+                        <Input
+                          control={control}
+                          name={input.name}
+                          placeholder={input.labelName}
+                          type={input.type}
+                          min={input.min}
+                          isRequired={input.isRequired}
+                        />
+                      :
+                        <Input
+                          control={control}
+                          name={input.name}
+                          placeholder={input.labelName}
+                          type={input.type}
+                          isRequired={input.isRequired}
+                        />
+                    }
+                  </div>
                 }
-              </div>
+              </>
             ))
           }
+
+          <div className="col-md-6 mb-3">
+            <Controller
+              name="country"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <select {...field} required>
+                  <option value="Country">Country</option>
+                  {countries.map((country,index) => (
+                    <option key={`${country.cc2}-${index}`} value={country.name.common}>
+                      {country.name.common}
+                    </option>
+                  ))}
+                </select>
+              )}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="address row">
-        <p>{eng["form-addres"]}<span>*</span></p>
-        
-        {addresInputs.map((input, index) => (
-            <>
-              {index <=1 && 
-                <div className="col-md-12 mb-3" key={`${input.name}-${index}`}>
-                  <Input
-                    control={control}
-                    name={input.name}
-                    placeholder={input.labelName}
-                    type={input.type}
-                    isRequired={input.isRequired}
-                  />
-                </div>
-              }
-              {index > 1 &&
-                <div className="col-md-6 mb-3" key={`${input.name}-${index}`}>
-                  { input.type === 'number' ?
-                      <Input
-                        control={control}
-                        name={input.name}
-                        placeholder={input.labelName}
-                        type={input.type}
-                        min={input.min}
-                        isRequired={input.isRequired}
-                      />
-                    :
-                      <Input
-                        control={control}
-                        name={input.name}
-                        placeholder={input.labelName}
-                        type={input.type}
-                        isRequired={input.isRequired}
-                      />
-                  }
-                </div>
-              }
-            </>
-          ))
-        }
-
-        <div className="col-md-6 mb-3">
-          <Controller
-            name="country"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <select {...field} required>
-                <option value="Country">Country</option>
-                {countries.map((country,index) => (
-                  <option key={`${country.cc2}-${index}`} value={country.name.common}>
-                    {country.name.common}
-                  </option>
-                ))}
-              </select>
-            )}
-          />
+        <div className="text-center">
+          <button className="px-5 py-2 rounded-pill text-light" type="submit">Order</button>
         </div>
-      </div>
+      </form>
+      { isModalOpen && <ModalComponent order={orderData} closeModal={closeModal}/>  } 
+    </>
 
-      <div className="text-center">
-        <button className="px-5 py-2 rounded-pill text-light" type="submit">Order</button>
-      </div>
-    </form>
   );
 }
 
