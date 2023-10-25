@@ -4,13 +4,48 @@
 
 ## Documentação do projeto
 
-> O teste técnico prevê a criação de um formulário de pedido para uma loja de bolos, de acordo com o layout fornecido. Você pode conferir os detalhes documentados neste arquivo antes de avaliar o código
+> O teste técnico prevê a criação de um formulário de pedido para uma loja de bolos, de acordo com o <b>layout fornecido</b>. Você pode conferir os detalhes documentados neste arquivo antes de avaliar o código.
+
+<br>
+
+##  Download e Teste
+
+-  Instalar o [Git](https://git-scm.com/), [NodeJS](https://nodejs.org/pt-br/download/) + [npm](https://www.npmjs.com/get-npm):
+
+```bash
+# Versões mínimas ou superiores.
+ node -v
+v16.18.0
+
+ npm -v
+8.19.2
+```
+
+```bash
+# Clonar o repositório
+https://github.com/Calebe-Fernandes/teste-tecnico-claro.git
+
+#Entrar no diretório
+ cd teste-tecnico-claro
+
+#Instalar as dependências
+ npm install
+
+#Iniciar o local host
+ npm start
+```
+
+- Por ultimo abra seu navegador e digite:
+
+```
+localhost:3000
+```
+
+---
 
 <br>
 
 ## 💻 Tecnologias e aplicações
-<h3>Frontend - React.Js - TypeScript - SASS - Bootstrap - React Form Hooks - React Toastify</h3>
-
 <h3>React.Js - SASS - Bootstrap </h3>
 
 * Para construção da aplicação, o ReactJs foi determinado como pré-requisito, possibilitando a alteração e manipulação do DOM sem ocasionar recarregamentos, sendo mais performático neste sentido. O Bootstrap foi utilizado para a responsividade dos elementos agrupadores (como elementos de div) e o pré processador SASS foi utilizado para estilização específica de elementos, sendo uma de suas principais vantagens a possibilidade de hierarquizar e agrupar os estilos, melhorando também a manuteção do código.
@@ -66,7 +101,7 @@ nos dados na hora da comunicação com uma api em um cenário real, portanto opt
 
 <br>
 
-## Preview do projeto 🖥️
+## Preview do projeto 👀
 
 * Notificações de sucesso e erro
 
