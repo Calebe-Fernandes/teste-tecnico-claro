@@ -10,31 +10,32 @@
 
 ## 💻 Tecnologias e aplicações
 <h3>Frontend - React.Js - TypeScript - SASS - Bootstrap - React Form Hooks - React Toastify</h3>
-<h3><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-width="5%" height="auto">&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-width="5%" height="auto"></h3>
 
-Para construção da aplicação, o ReactJs foi determinado como pré-requisito, possibilitando a alteração e manipulação do DOM sem ocasionar recarregamentos, sendo mais performático neste sentido. O Bootstrap foi utilizado para a responsividade dos elementos agrupadores (como elementos de div) e o pré processador SASS foi utilizado para estilização específica de elementos, sendo uma de suas principais vantagens a possibilidade de hierarquizar e agrupar os estilos, melhorando também a manuteção do código.
+<h3>React.Js - SASS - Bootstrap </h3>
 
-A arquitetura de pastas se baseia em componentes, onde cada componente tem sua própria pasta que contém seu arquivo index.tsx e seu arquivo styles.scss, de modo
+* Para construção da aplicação, o ReactJs foi determinado como pré-requisito, possibilitando a alteração e manipulação do DOM sem ocasionar recarregamentos, sendo mais performático neste sentido. O Bootstrap foi utilizado para a responsividade dos elementos agrupadores (como elementos de div) e o pré processador SASS foi utilizado para estilização específica de elementos, sendo uma de suas principais vantagens a possibilidade de hierarquizar e agrupar os estilos, melhorando também a manuteção do código.
+
+<h3>Arquitetura</h3>
+
+* A arquitetura de pastas se baseia em componentes, onde cada componente tem sua própria pasta que contém seu arquivo index.tsx e seu arquivo styles.scss, de modo
 a separar os conteúdos. O arquivo index.ts exporta os componentes de forma modular, proporcionando uma importação mais organizada e legível.
 
-Os textos da aplicação foram separados em um arquivo eng.ts, afim de concentrar as variáveis de desto e facilitar a manutenção do código. Em projetos maiores,
+* Os textos da aplicação foram separados em um arquivo eng.ts, afim de concentrar as variáveis de desto e facilitar a manutenção do código. Em projetos maiores,
 é uma boa prática manter os textos como variáveis para caso mudem,não seja necessário navegar por toda a aplicação para alterá-lo em diferentes pontos.
 
+* As variáveis de cores se encontram no arquivo colors.scss, e foram separadas também para manter o código de fácil manutenção e alteração
 
-As variáveis de cores se encontram no arquivo colors.scss, e foram separadas também para manter o código de fácil manutenção e alteração
+<h3>React Form Hooks</h3>
 
-O React Form Hooks foi utilizado para lidar com os campos do formulário, melhorando a eficiência e manutenção de código, onde não é necessário gerenciar o estado
+* O React Form Hooks foi utilizado para lidar com os campos do formulário, melhorando a eficiência e manutenção de código, onde não é necessário gerenciar o estado
 de todos os campos do formulário para acessar seus valores via useState ou similares.
 
-O React Toastify foi utiizado para notificar o usuário com mensagens estilo "notificações" de sucessos e erros durante sua interação na aplicação
+<h3>React Toastify</h3>
+
+* O React Toastify foi utiizado para notificar o usuário com mensagens estilo "notificações" de sucessos e erros durante sua interação na aplicação
 
 <br>
 
-
-
-<br>
 
 ## 🚀 Features
 
