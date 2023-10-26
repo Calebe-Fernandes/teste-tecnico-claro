@@ -16,7 +16,7 @@ import calendar from '../../assets/calendar.png'
 import clock from '../../assets/clock.png'
 
 import ModalComponent from "../Modal";
-import { icon } from "@fortawesome/fontawesome-svg-core";
+
 
 
 interface cakeOrder{
@@ -44,6 +44,8 @@ function Form() {
   const [resetInput,setResetInput] = useState<boolean>(true);
   const [orderData,setOrderData] = useState<cakeOrder>({} as cakeOrder);
   const [isModalOpen,setIsModalOpen] = useState<boolean>(false);
+  const [isSendingRequest,setIsSendingRequest] = useState<boolean>(false);
+
 
   const cakeOptions = [
     {
@@ -260,6 +262,7 @@ function Form() {
   }
 
   async function registerOrder(data:cakeOrder){
+    setIsSendingRequest(true);
     await fetch('https://jsonplaceholder.typicode.com/posts',{
       method:"POST",
       headers: {
@@ -285,6 +288,7 @@ function Form() {
           progress: undefined,
           theme: "light",
         });
+        setIsSendingRequest(false);
         setOrderData(responseData);
         setIsModalOpen(true);
         reset(); 
@@ -300,6 +304,7 @@ function Form() {
           progress: undefined,
           theme: "light",
         });
+        setIsSendingRequest(false);
       }
     })
   }
@@ -461,7 +466,7 @@ function Form() {
         </div>
 
         <div className="text-center">
-          <button className="px-5 py-2 rounded-pill text-light" type="submit">Order</button>
+          <button className="px-5 py-2 rounded-pill text-light" type="submit"  disabled={isSendingRequest}>Order</button>
         </div>
       </form>
       { isModalOpen && <ModalComponent image={findCakeImg(orderData)} order={orderData} closeModal={closeModal}/>  } 

@@ -23,6 +23,10 @@ form {
 
   button {
     background-color: var(--button);
+
+    &:disabled{
+      background-color: var(--disabled);
+    }
   }
 
   .order-info,.address {
