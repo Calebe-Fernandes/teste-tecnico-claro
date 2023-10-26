@@ -63,6 +63,7 @@ form {
     }
 
     input[type="date"],input[type="time"]{
+      -moz-appearance: textfield;
       &::-webkit-calendar-picker-indicator{
         width: 24px;
         height: 24px;
@@ -122,5 +123,11 @@ form {
       padding-right: 1em;
 
     }
+  }
+}
+
+@-moz-document url-prefix() {
+  input[type="date"]+img {
+    display: none;
   }
 }
