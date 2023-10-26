@@ -99,9 +99,20 @@ nos dados na hora da comunicação com uma api em um cenário real, portanto opt
 ### Integração com API de países
 * O Campo select "Country" é populado dinamicamente com dados originados de uma api
 
+### Modal de revisão de pedido
+* Modal concentrando as informações referentes ao pedido do bolo realizado
+
+### Integração com WhatsApp
+* Botão de suporte no modal de revisão de pedido, onde é possível enviar uma mensagem via whatsapp
+
 <br>
 
 ## Preview do projeto 👀
+
+* Modal de revisão de pedido
+  
+  <img src="https://github.com/Calebe-Fernandes/assets/blob/main/Captura%20de%20tela%202023-10-26%20000813.png?raw=true" alt="Thumbnail">
+  
 
 * Notificações de sucesso e erro
 
