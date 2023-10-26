@@ -21,6 +21,8 @@ v16.18.0
 8.19.2
 ```
 
+* Crie uma pasta onde deseja clonar o repositório, abra o terminal nela e digite:
+
 ```bash
 # Clonar o repositório
 git clone https://github.com/Calebe-Fernandes/teste-tecnico-claro.git
