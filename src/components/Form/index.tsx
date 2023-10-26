@@ -12,7 +12,11 @@ import cake1 from '../../assets/cake1.jpg'
 import cake2 from '../../assets/cake2.jpg'
 import cake3 from '../../assets/cake3.jpg'
 import cake4 from '../../assets/cake4.jpg'
-import ModalComponent from "../modal";
+import calendar from '../../assets/calendar.png'
+import clock from '../../assets/clock.png'
+
+import ModalComponent from "../Modal";
+import { icon } from "@fortawesome/fontawesome-svg-core";
 
 
 interface cakeOrder{
@@ -83,7 +87,8 @@ function Form() {
       placeHolder:'',
       type:'date',
       min:today,
-      isRequired:true
+      isRequired:true,
+      icon:calendar
     },
     {
       name:'time',
@@ -91,7 +96,8 @@ function Form() {
       placeHolder:'',
       type:'time',
       min:'',
-      isRequired:false
+      isRequired:false,
+      icon:clock
     },
     {
       name:'phone',
@@ -281,7 +287,7 @@ function Form() {
         });
         setOrderData(responseData);
         setIsModalOpen(true);
-        //reset(); 
+        reset(); 
         setResetInput(true);
       }else{
         toast.error(`${eng.error}`, {
@@ -305,6 +311,15 @@ function Form() {
 
   function closeModal(){
     setIsModalOpen(false)
+  }
+
+  function findCakeImg(order:cakeOrder){
+    for (const cake of cakeOptions) {
+      if (cake.name === order.cake) {
+        return cake.image;
+      }
+    }
+    return ''
   }
 
   return (
@@ -335,7 +350,7 @@ function Form() {
 
           <div className="row">
             {orderInfoInputs.map((input,index) => (
-                <div className={`col-md-6 mb-4 ${input.name === 'last' ? 'd-flex align-items-end' : ''}`} key={`${input.name}-${index}`}>
+                <div className={`col-md-6 mb-4 position-relative ${input.name === 'last' ? 'd-flex align-items-end' : ''}`} key={`${input.name}-${index}`}>
                   {
                     !input.min  && input.labelName &&
                       <>
@@ -346,6 +361,7 @@ function Form() {
                           placeholder={input.placeHolder}
                           type={input.type}
                           isRequired={input.isRequired}
+                          icon={input.icon}
                         />
                         {input.name === 'email' ?  <p>{eng["form-order-email-info"]}</p> : false}
                       </>
@@ -362,15 +378,20 @@ function Form() {
                   }
                   {
                     input.min &&
-                    <Input
-                      control={control}
-                      name={input.name}
-                      labelName={input.labelName}
-                      placeholder={input.placeHolder}
-                      type={input.type}
-                      min={input.min}
-                      isRequired={input.isRequired}
-                    />
+                    <>
+                      <Input
+                        control={control}
+                        name={input.name}
+                        labelName={input.labelName}
+                        placeholder={input.placeHolder}
+                        type={input.type}
+                        min={input.min}
+                        isRequired={input.isRequired}
+                        icon={input.icon}
+                      />
+                      {input.name === 'email' ?  <p>{eng["form-order-email-info"]}</p> : false}
+                    </>
+
                   }
                 </div>
               ))
@@ -443,7 +464,7 @@ function Form() {
           <button className="px-5 py-2 rounded-pill text-light" type="submit">Order</button>
         </div>
       </form>
-      { isModalOpen && <ModalComponent order={orderData} closeModal={closeModal}/>  } 
+      { isModalOpen && <ModalComponent image={findCakeImg(orderData)} order={orderData} closeModal={closeModal}/>  } 
     </>
 
   );

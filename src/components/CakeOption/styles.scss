@@ -1,28 +1,30 @@
-img{
-  min-width: calc(100% - 46px);
-  max-width: 100%;
-  height: 250px;
+.cake-option {
+  img{
+    min-width: calc(100% - 46px);
+    max-width: 100%;
+    height: 250px;
 
-  object-fit: cover;
-}
+    object-fit: cover;
+  }
 
-input[type="radio"]{
-  min-width: 28px;
-  min-height: 28px;
-  align-self: center;
-  margin-right: 18px;
-  border-color: var(--radio-button);
-  appearance: none;
-  -webkit-appearance: none;
- 
-  background-color: #fff;
-  border-radius: 50%;
-  outline: 1px solid var(--radio-button);
+  input[type="radio"]{
+    min-width: 28px;
+    min-height: 28px;
+    align-self: center;
+    margin-right: 18px;
+    border-color: var(--radio-button);
+    appearance: none;
+    -webkit-appearance: none;
+  
+    background-color: #fff;
+    border-radius: 50%;
+    outline: 1px solid var(--radio-button);
 
-  cursor: pointer;
+    cursor: pointer;
 
-  &:checked {
-    border: 0.3rem solid #fff;
-    background-color: var(--radio-button);
+    &:checked {
+      border: 0.3rem solid #fff;
+      background-color: var(--radio-button);
+    }
   }
 }

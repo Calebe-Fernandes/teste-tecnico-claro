@@ -13,7 +13,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 function CakeOption({ image, alt, name, type, value, control}: InputProps){
 return (
-  <div className="d-flex">
+  <div className="d-flex cake-option">
     <Controller
         name={name}
         control={control}

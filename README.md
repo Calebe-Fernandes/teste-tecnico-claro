@@ -23,7 +23,7 @@ v16.18.0
 
 ```bash
 # Clonar o repositório
-https://github.com/Calebe-Fernandes/teste-tecnico-claro.git
+git clone https://github.com/Calebe-Fernandes/teste-tecnico-claro.git
 
 #Entrar no diretório
  cd teste-tecnico-claro

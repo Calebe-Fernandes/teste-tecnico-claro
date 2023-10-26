@@ -5,11 +5,12 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     labelId?:string,
     isRequired:boolean,
     name:string,
+    icon?:string,
     control:any
 }
 
 
-function Input({ labelName, isRequired, name, control, ...props }: InputProps) {
+function Input({ labelName, isRequired, name, control, icon, ...props }: InputProps) {
   return (
     <>  
       <label htmlFor={props.id}>{labelName}{isRequired && labelName &&<span>*</span>}</label>
@@ -26,6 +27,7 @@ function Input({ labelName, isRequired, name, control, ...props }: InputProps) {
           />
         )}
       />
+      {icon && <img onClick={()=>{alert('click')}}draggable="false" className="inpt-icon" src={icon} alt="ícone" />}
     </>
   );
 }

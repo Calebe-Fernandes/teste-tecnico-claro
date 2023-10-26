@@ -1,17 +1,29 @@
 form {
+  img.inpt-icon{
+    min-width: 1px;
+    height: 20px;
+
+    position: absolute;
+    right: 31px;
+    top: 55%;
+
+    filter: invert(72%) sepia(10%) saturate(13%) hue-rotate(347deg) brightness(95%) contrast(84%);
+
+    pointer-events: none;
+  }
+
   p{
     color: var(--text);
     font-weight: 500;
   }
 
   span {
-    color: red;
+    color: var(--mandatory-field);
   }
 
   button {
     background-color: var(--button);
   }
-
 
   .order-info,.address {
     p {
@@ -51,7 +63,8 @@ form {
         width: 24px;
         height: 24px;
         cursor: pointer;
-        filter: invert(0.5) sepia(100%) saturate(100%) hue-rotate(180deg);
+        filter: opacity(0) invert(0.5) sepia(100%) saturate(100%) hue-rotate(180deg);
+        transform: scale(4);
       }
     }
 

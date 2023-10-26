@@ -14,7 +14,7 @@ const eng = {
     'error-invalid-email':'Please enter a vaid email',
     'modal-title':'Order review',
     'modal-close':'Close',
-    'modal-help-1':'Need Help?',
+    'modal-help-1':'Need Help? ',
     'modal-help-2':'Contact us',
     'modal-name':'Name: ',
     'modal-cake':'Cake ordered: ',
