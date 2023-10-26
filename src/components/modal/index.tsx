@@ -93,7 +93,7 @@ function ModalComponent({order,closeModal,image}:modalProps){
 
           <p>
             <span className="weight-500">{eng["modal-address"]} </span>
-            {order.streetAddres}, {order.streetAddressLine2 && <span>{order.streetAddressLine2}, </span>} {order.zipCode}, {order.city}, {order.region} - {order.country}
+            {order.streetAddres}, {order.streetAddresLine2 && <span>{order.streetAddresLine2}, </span>} {order.zipCode}, {order.city}, {order.region} - {order.country}
           </p>
  
           <button
